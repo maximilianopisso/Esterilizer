@@ -1,29 +1,29 @@
 // CARGO LA LISTA DE USUARIOS DEL LOCALSTORE
 let usuarios = recrearBD(`listaUsuarios`);
-console.log("CARGA LOCAL STORE - LISTADO USUARIOS");
-console.log(usuarios, usuarios.length)
+console.log("MAIN - LISTADO CARGADO DESDE LOCALSTORE");
+console.log(usuarios + usuarios.length)
 
-const LOTEO =2545;
 // SETEO INICIAL DE NUMERO DE LOTE (Si no existe en el Local, se inicializa con el valor por defecto)
+const LOTEO =2545;
 
 if (localStorage.idLote == null) {
     localStorage.setItem(`idLote`,LOTEO) 
 }
-// DEFINO POSICION DEL USUARIO LOGEADO DENTRO DEL LISTADO DE USUARIOS
+
+// OBTENGO INDICE DEL USUARIO QUE SE LOGEO DEL LISTADO DE USUARIOS
 let indexUserLogin = parseInt(localStorage.getItem("userID"));
 
-//Usuario logeado 
+// INICIALIZO AL USUARIO LOGEADO
 let usuarioLogeado = usuarios[indexUserLogin]; // TENGO QUE VER LA FORMA DE OBTENERLO DEL LOGIN con el localStorage
 
 
-//Inicio del Usuario
-
+//SALUDO DE BIENVENIDA
 if (usuarioLogeado.sexo === `M`) {
     document.getElementById(`msjBienvenida`).innerHTML = `<h1>Bienvenido, ${usuarioLogeado.nombre} ${usuarioLogeado.apellido} <h1>`;
 } else {
     document.getElementById(`msjBienvenida`).innerHTML = `<h1>Bienvenida, ${usuarioLogeado.nombre} ${usuarioLogeado.apellido} <h1>`;
 }
-
+// MUESTRO LOS MOVIMIENTOS ANTERIORES
 usuarioLogeado.mostrarMovimientos();
 
 $("#formProcesamiento").submit(function (e) {
@@ -46,8 +46,9 @@ $("#formProcesamiento").submit(function (e) {
 
     usuarios[indexUserLogin]=usuarioLogeado; //guardo cambios del usuario en listado de usuarios en memoria
     console.log(usuarios);
-    guardarMovLocalStore(`listaUsuarios`, usuarios);  //guardos cambios en localStore
-       
+        
+    localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios))   // guardo cambios en el local Store
+    
     $("#formProcesamiento")[0].reset();   //reseteo formulario
 });
 

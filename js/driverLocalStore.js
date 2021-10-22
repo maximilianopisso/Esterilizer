@@ -1,3 +1,4 @@
+//CARGA LOCAL DE ALGUNOS USUARIOS
 
 function loadInitialData() {
     console.log("Carga Inicial")
@@ -15,44 +16,26 @@ function loadInitialData() {
     const usuario4 = new Usuario(`Emiliano`, `Cinquini`, `ecinquini@gmail.com`, `PUpi2020`, `3415493162`, `M`, cargaMovimientos);
 
     listadoUsuarios = [usuario1, usuario2, usuario3, usuario4];
-
+    localStorage.setItem(`usersAPI`, JSON.stringify(listadoUsuarios));
     return listadoUsuarios    // CARGA USUARIOS CON API
 
 }
 
-
-// async function carga(){
-
-
-//    var consulta = $.ajax({
-//         url: 'https://randomuser.me/api/',
-//         dataType: 'json',
-//         data: { results: "10" },
-//         success: function (data) {
-//             // console.log("Resultado de lo que traigo por API")
-//             // console.log(data.results)
-//             localStorage.setItem(`usersAPI`, JSON.stringify(data.results));
-//         }
-//     })
-// }
-
-
-
-function usuariosApi() {
+async function usuariosApi() {
 console.log("Carga Por Api")
    
     if (localStorage.usersAPI == null) {
        
-        var consulta = $.ajax({
+            var consulta = await $.ajax({
             url: 'https://randomuser.me/api/',
             dataType: 'json',
             data: { results: "10" },
-            success: function (data) {
-                //console.log(data.results)
-                localStorage.setItem(`usersAPI`, JSON.stringify(data.results));
-                
+            success: await function (data) {
+                return data;
             }
         }) 
+
+        localStorage.setItem(`usersAPI`, JSON.stringify(consulta.results));
         
     } 
         
@@ -72,33 +55,6 @@ console.log("Carga Por Api")
         return listadoUsuario
 
     }
-
-
-
-
-
-
-
-
-//     //     //nombre, apellido, email, password, contacto, sexo, movimientos
-//     //     for (let i = 0; i<userApi.length;i++){
-
-//     //         (userApi[i].gender == "male") ? sexo = `M` : sexo = `F`        
-//     //         usuario = new Usuario (userApi[i].name.first,userApi[i].name.last,userApi[i].email,userApi[i].login.password,userApi[i].cell,sexo,[])
-
-//     //         listadoUsuarios.push(usuario);
-//     //         console.log(usuarios)
-//     //     }
-
-//     //     return listadoUsuarios;
-
-
-
-//FUNCIONES PARA CARGAR EL LOCAL STORE A MEMORIA
-
-
-
-
 function recrearBD(idLocalStoreitem) {
 
     let users = JSON.parse(localStorage.getItem(`${idLocalStoreitem}`));
@@ -114,32 +70,28 @@ function recrearBD(idLocalStoreitem) {
             let movimientos = new Movimiento(movs[j].id, movs[j].fecha, movs[j].lote, movs[j].proceso, movs[j].puntaje, movs[j].diasEsteriles, movs[j].vencimiento)
             listadoMovimientos.push(movimientos);
         }
-
         //CREO NUEVO USUARIO CON LOS DATOS COMPLETOS
         let usuarioNuevo = new Usuario(users[i].nombre, users[i].apellido, users[i].email, users[i].password, users[i].contacto, users[i].sexo, listadoMovimientos)
         //AGREGO USUARIO A LISTA DE USUARIOS
         listadoUsuario.push(usuarioNuevo);
         //BORRO LISTADO DE MOVIMIENTOS PARA PROXIMO USUSARIO
         listadoMovimientos = [];
-
     }
-
     return listadoUsuario;
-
 }
 
-/**
- * FUNCION PARA GUARDAR LOS MOVIMIENTOS EN EL LOCALSTORE PARA QUE LOS REGISTROS SE MANTENGAN
- * DE FORMA CONSISTENTE
- */
-function guardarMovLocalStore(idLocalStoreitem, datos) {
+// /**
+//  * FUNCION PARA GUARDAR LOS MOVIMIENTOS EN EL LOCALSTORE PARA QUE LOS REGISTROS SE MANTENGAN
+//  * DE FORMA CONSISTENTE
+//  */
+// function guardarMovLocalStore(idLocalStoreitem, datos) {
 
-    //borro la lista de usuarios completamente lo que esta en el LocalStore
-    //localStorage.removeItem(`${idLocalStoreitem}`);
-    console.log(datos)
-    //reemplazo el usuario en el conjunto de usuarios cargados en memoria
-    //guardo arreglo modificado nuevamente en localStore
-    localStorage.setItem(`${idLocalStoreitem}`, JSON.stringify(datos));
+//     //borro la lista de usuarios completamente lo que esta en el LocalStore
+//     //localStorage.removeItem(`${idLocalStoreitem}`);
+//     console.log(datos)
+//     //reemplazo el usuario en el conjunto de usuarios cargados en memoria
+//     //guardo arreglo modificado nuevamente en localStore
+//     localStorage.setItem(`${idLocalStoreitem}`, JSON.stringify(datos));
 
-}
+// }
 
