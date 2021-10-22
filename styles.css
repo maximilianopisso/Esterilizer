@@ -105,14 +105,18 @@ tr{
 
 
 /* CSS Footer */
+
 footer{
     background-color: #49946b;
     
 }
-footer p,a{
+footer .titulos,a{
     color: white;
     font-weight: bold;
-    font-size: 1.5rem;
+}
+footer p{
+    padding: 11px;
+    color: white;
 }
 footer a:hover{
     background-color: #a89ebb;
@@ -125,7 +129,7 @@ footer a:hover{
 footer .fa {
     display: inline-block;
     margin: 0 20px;
-    padding: 20px 40px   ;
+    padding: 10px 40px;
     font-size: 2rem;
     text-decoration: none;
     transition: color 1s;
