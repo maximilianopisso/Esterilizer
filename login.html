@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <!-- Iconos Redes Sociales -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Para importar iconos redes sociales -->
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Boostrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+  <!-- JScript -->
+  <script src="./classes/usuario.js"></script>
+  <script src="./classes/movimiento.js"></script>
+  <script src="./js/driverLocalStore.js" defer></script>
+  <script src="./js/login.js" defer></script>
+</head>
+
+
+<body>
+  <!-- header fixed-top"-->
+  <nav class="navbar navbar-expand-lg navbar-dark estilos-menu">
+    <div class="container-fluid">
+      <a class="navbar-brand logo">Esterilizer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link  " href="#contactos">Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- inicio -->
+  <section id="inicio" class="container">
+
+    <div class="row align-items-center py-2">
+      <div class="col-lg-12 d-flex justify-content-center py-4">
+        <h1>Iniciar Sesion</h1>
+      </div>
+    </div>
+
+    <!-- <button onclick="recrearBD(`listaUsuarios`)">RECREAR BD</button> -->
+    <div class="row align-items-center pb-5 mb-5">
+      <div class="col-lg-12 d-flex justify-content-center">
+        <form id="formulario" class="row g-3">
+          <div class="col-md-12">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" class="form-control" name="mail" id="email" required>
+          </div>
+          <div class="col-md-12">
+            <label for="inputPassword4" class="form-label">Password</label>
+            <!-- <input type="password" class="form-control" id="pass" required> -->
+            <input type="text" class="form-control" name="password" id="password" required>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </div>
+        </form>
+      </div>
+  </section>
+
+  <!-- footer -->
+  <footer id="contactos" class="pt-5">
+
+    <div class="row align-items-center pt-5">
+      <div class="col-lg-12 d-block text-center ">
+        <p class="text-center">Nuestras Redes</p>
+        <a class="fa fa-facebook" href="https:\\facebook.com"></a>
+        <a class="fa fa-twitter" href="https:\\twitter.com"></a>
+        <a class="fa fa-instagram" href="https:\\instagram.com"></a>
+      </div>
+
+      <div class="col-lg-12 text-center p-5">
+        <p>Escribinos</p>
+        <p>contacto@esterilizer.com.ar</p>
+      </div>
+    </div>
+
+    <p class="leyenda text-center pb-5">Copyright © 2021 Esterilizer S.A. Todos los derechos reservados</p>
+
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+
+/* CSS General */
+.logo{
+    font-size: 2rem;
+}
+
+h1{
+    
+    font-size: 2.5rem;
+    color: #2b533d;
+    font-weight: bold ;
+}
+
+h2{
+    font-size: 2.5rem;
+    font-size: bold;
+    color: #213f1d;
+    
+}
+
+h3{
+    font-size: 1.2rem;
+    color: #213f1d;
+}
+
+
+
+#inicio{
+    margin-top: 5rem;
+}
+
+
+
+/* CSS HEADER */
+.estilos-menu {
+
+    background-color: #49946b;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.nav-link{
+    margin: 0px 5px;
+    padding: 5px 15px !important;
+    color:white !important;
+}
+
+.nav-link:hover{
+    background-color: #a89ebb;
+    color:white !important;
+    transition: all 1s;
+    border-radius: 5px;
+}
+
+
+/* CSS Signin */
+
+label{
+    color: rgb(56, 56, 56);
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+#calcular{
+
+font-size: 2rem;
+background-color: #213f1d;
+
+}
+
+/* CSS Tabla */
+
+th{
+    font-size: 2rem;
+    
+}
+#detalleResultadoTabla tr{
+    font-weight: bold;
+    font-size: 2rem;
+}
+tr{
+    font-size: 1.5rem;
+    
+    
+}
+
+@media only screen and (max-width: 910px){
+    th{
+        font-size: 1.5rem;
+        
+    }
+    #detalleResultadoTabla tr{
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+    tr{
+        font-size: 1rem;
+        
+        
+    }
+}
+
+    
+
+
+/* CSS Footer */
+footer{
+    background-color: #49946b;
+    
+}
+footer p,a{
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+footer a:hover{
+    background-color: #a89ebb;
+    color: white;
+    border-radius: 20px;
+    transition: all 0.5s;
+    
+}
+
+footer .fa {
+    display: inline-block;
+    margin: 0 20px;
+    padding: 20px 40px   ;
+    font-size: 2rem;
+    text-decoration: none;
+    transition: color 1s;
+}
+
+
+.leyenda{
+    font-size: 1.2rem !important;
+    font-weight: normal;
+}
+
+
+/* CSS Ingreso */
+.fondo{
+    background-color: #49946b;
+    background-image: linear-gradient(180deg,#fff 20%, #8842c1 80%);
+  
+}
+
+.boton{
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+    
+    
+
+}
+.boton:hover{
+    color: white;
+    padding: 0px 20px;
+    transition: all 1s;
+}
