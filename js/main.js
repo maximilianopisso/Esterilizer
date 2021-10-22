@@ -1,7 +1,7 @@
 // CARGO LA LISTA DE USUARIOS DEL LOCALSTORE
 let usuarios = recrearBD(`listaUsuarios`);
 console.log("MAIN - LISTADO CARGADO DESDE LOCALSTORE");
-console.log(usuarios + usuarios.length)
+console.log(usuarios)
 
 // SETEO INICIAL DE NUMERO DE LOTE (Si no existe en el Local, se inicializa con el valor por defecto)
 const LOTEO =2545;
