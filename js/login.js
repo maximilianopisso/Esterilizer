@@ -5,7 +5,7 @@ var usuarios = [];
 if (localStorage.listaUsuarios != null) {
     usuarios = recrearBD(`listaUsuarios`);
     console.log("CARGA LOCALSTORE - LISTADO USUARIOS");
-
+    
 } else {
 
     console.log("CARGA POR CODIGO INICIAL");
@@ -17,14 +17,15 @@ if (localStorage.listaUsuarios != null) {
     console.log("SUMO USUARIOS POR API");
     usuarios = usuarios.concat(convertirUsuarios(usuariosApi()));
     localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
-
-    console.log(usuarios)
+    
 }
+    
+    console.log(usuarios)
 function msjError() {
 
     $("#msjerror").text("No se pudo logear, el usuario o la contraseña son incorrectas")
     $("#msjerror").show()
-        .delay(4000)
+        .delay(3000)
         .slideUp(300)
 
 }
@@ -83,7 +84,12 @@ function validarUsuario(email, password) {
         
         switch (respuesta[1]) {
 
-            case 1: $("#msjerror").text(`La contraseña es incorrecta. Nro Intentos: ${usuarios[indice_error].nroIntentos}`)
+            case 1: 
+                    if(usuarios[indice_error].nroIntentos == 0){
+                        $("#msjerror").text(`La contraseña es incorrecta. Su usuario fue bloqueado`)
+                    }else{
+                        $("#msjerror").text(`La contraseña es incorrecta. Nro Intentos: ${usuarios[indice_error].nroIntentos}`)
+                    }
                 break;
             case 2:$("#msjerror").text(`El usuario o la contraseña son incorrectos`)
                 break;

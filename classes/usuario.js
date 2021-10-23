@@ -27,7 +27,7 @@ class Usuario {
         let respuesta = [false, 0]
 
         
-        if (this.nroIntentos > 1) {   // Verifica condicion de nro de intentos
+        if (this.nroIntentos > 0) {   // Verifica condicion de nro de intentos
 
             if ((this.email == email) && (this.password == password)) {    // Busca coincidencia por mail y contraseña (validacion)
                 respuesta = [true, 0];
