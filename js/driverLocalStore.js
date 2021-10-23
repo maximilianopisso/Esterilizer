@@ -75,6 +75,7 @@ function recrearBD(idLocalStoreitem) {
 
         //CREO NUEVO USUARIO CON LOS DATOS COMPLETOS
         let usuarioNuevo = new Usuario(users[i].nombre, users[i].apellido, users[i].email, users[i].password, users[i].contacto, users[i].sexo, listadoMovimientos)
+        usuarioNuevo.nroIntentos = users[i].nroIntentos;
         //AGREGO USUARIO A LISTA DE USUARIOS
         listadoUsuario.push(usuarioNuevo);
         //BORRO LISTADO DE MOVIMIENTOS PARA PROXIMO USUSARIO

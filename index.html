@@ -51,59 +51,70 @@
   </nav>
 
   <!-- inicio -->
+
   <section id="inicio" class="container">
 
-    <div class="row align-items-center py-2">
+    <div class="row align-items-center ">
       <div class="col-lg-12 d-flex justify-content-center py-4">
         <h1>Iniciar Sesion</h1>
       </div>
     </div>
 
     <!-- <button onclick="recrearBD(`listaUsuarios`)">RECREAR BD</button> -->
-    <div class="row align-items-center pb-5 mb-5">
-      <div class="col-lg-12 d-flex justify-content-center">
-        <form id="formulario" class="row g-3">
-          <div class="col-md-12">
+    <div class="row justify-content-center pb-5 mb-5">
+
+      <div class="col-lg-6">
+        
+        <form id="formulario" class="row d-grid g-3">
+          <div class="col-12">
             <label for="inputEmail4" class="form-label">Email</label>
             <input type="email" class="form-control" name="mail" id="email" required>
           </div>
-          <div class="col-md-12">
+
+          <div class="col-12">
             <label for="inputPassword4" class="form-label">Password</label>
-            <!-- <input type="password" class="form-control" id="pass" required> -->
             <input type="text" class="form-control" name="password" id="password" required>
           </div>
-          <div class="col-12 d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Sign in</button>
+          <div class="col-12 mb-5">
+            <p id="msjerror"></p>
           </div>
+          <div class="col-12 mt-5 " id="boton-conteiner">
+            <button id="boton" type="submit" class="btn btn-primary">Ingresar</button>
+          </div>
+
         </form>
+        
       </div>
+      
+    </div>
+    </div>
   </section>
 
- <!-- footer -->
-        
- <footer id="contactos" class="pt-5">
+  <!-- footer -->
+
+  <footer id="contactos" class="pt-5">
 
 
-  <div class="row d-flex py-5 mt-3">
+    <div class="row d-flex py-5 mt-3">
 
       <div class="col-6 d-block text-center">
 
-          <p class="titulos">Nuestras Redes</p>
-          <a class="fa fa-facebook" href="https:\\facebook.com"></a>
-          <a class="fa fa-twitter" href="https:\\twitter.com"></a>
-          <a class="fa fa-instagram" href="https:\\instagram.com"></a>
+        <p class="titulos">Nuestras Redes</p>
+        <a class="fa fa-facebook" href="https:\\facebook.com"></a>
+        <a class="fa fa-twitter" href="https:\\twitter.com"></a>
+        <a class="fa fa-instagram" href="https:\\instagram.com"></a>
 
       </div>
 
       <div class="col-6 text-center">
-          <p class="titulos">Escribinos</p>
-          <p>contacto@ibwallet.com.ar</p>
+        <p class="titulos">Escribinos</p>
+        <p>contacto@ibwallet.com.ar</p>
       </div>
-  </div>
+    </div>
 
-  <p class="leyenda text-center pb-5">Copyright © 2021 IBWallet S.A. Todos los derechos reservados</p>
+    <p class="leyenda text-center pb-5">Copyright © 2021 IBWallet S.A. Todos los derechos reservados</p>
 
-</footer>
+  </footer>
 
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"

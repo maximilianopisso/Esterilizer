@@ -42,7 +42,7 @@ $("#formProcesamiento").submit(function (e) {
     
     usuarioLogeado.registrarMovimiento(resultado[0], resultado[1], diasEsteriles);
     usuarioLogeado.mostrarResultado();
-    usuarioLogeado.mostrarMovimientos();
+    usuarioLogeado.mostrarMovimientos();     
 
     usuarios[indexUserLogin]=usuarioLogeado; //guardo cambios del usuario en listado de usuarios en memoria
     console.log(usuarios);

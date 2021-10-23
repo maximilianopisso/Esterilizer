@@ -23,30 +23,40 @@ class Usuario {
      * @returns 
      */
     validarLogin(email, password) {
-       // console.log(email + password + this.email + this.password)
-        let encontrado = false;
-        // Verifica condicion de nro de intentos
-        if (this.nroIntentos !== 0) {
+       
+        let respuesta = [false, 0]
 
-            // Busca por mail y no match contraseña  (condicion para evaluar nro intentos)
-            if (((this.email == email) && (this.password !== password))) {
-                this.nroIntentos -= 1;
-                console.log("El usuario: " + email + " tiene " + (this.nroIntentos) + " intentos restantes");
-            }
+        
+        if (this.nroIntentos > 1) {   // Verifica condicion de nro de intentos
 
-            // Busca por mail y contraseña (validacion)
-            if ((this.email == email) && (this.password == password)) {
-                encontrado = true;
+            if ((this.email == email) && (this.password == password)) {    // Busca coincidencia por mail y contraseña (validacion)
+                respuesta = [true, 0];
                 this.resetNroIntentos();  //reset de numeros de intentos del usuario
                 console.log("El usuario: " + email + " tiene " + (this.nroIntentos) + " intentos restantes");
-            }
 
-            return encontrado;
+            } else{
+                
+                
+                if ((this.email == email) ) {   // Busca coincidencia por mail (condicion para evaluar nro intentos)
+                    this.nroIntentos -= 1;
+                    console.log("El usuario: " + email + " tiene " + (this.nroIntentos) + " intentos restantes");
+                    respuesta = [true, 1] // error de contraseña
+                    
+                } else{
 
+                    respuesta = [false,2];      // usuario o contraseña invalidos     
+                }    
+            }       
         } else {
-            alert("USUARIO BLOQUEDO POR NRO DE INTENTOS FALLIDOS");
-        }
+                if (this.email == email){
+                    respuesta = [true, 3]       //usuario bloqueado
+                }else{
+                    respuesta = [false,2];      //usuario bloqueado pero no el buscado
+                }
 
+        }
+        
+        return respuesta;
     }
 
     /**
@@ -67,14 +77,14 @@ class Usuario {
 
         //fecha elaboracion
         let hoy = new Date();
-        let fechaElaboracion = (hoy.getDay() + "/" + (hoy.getMonth()+1) + "/" + hoy.getFullYear()) // + " " + hoy.getHours() +":"+ hoy.getMinutes()
-        
+        let fechaElaboracion = (hoy.getDay() + "/" + (hoy.getMonth() + 1) + "/" + hoy.getFullYear()) // + " " + hoy.getHours() +":"+ hoy.getMinutes()
+
         //fecha vencimiento 
         hoy.setDate(hoy.getDate() + cantDias);
-        let fechaVencimiento = (hoy.getDay() + "/" + (hoy.getMonth()+1) + "/" + hoy.getFullYear())  //+ " " + hoy.getHours() +":"+ hoy.getMinutes()
+        let fechaVencimiento = (hoy.getDay() + "/" + (hoy.getMonth() + 1) + "/" + hoy.getFullYear())  //+ " " + hoy.getHours() +":"+ hoy.getMinutes()
 
         let movEsterilizacion = new Movimiento(numUltimoMov, fechaElaboracion, lote, descripcion, puntaje, cantDias, fechaVencimiento);
-        
+
         console.log(movEsterilizacion);
         this.movimientos.push(movEsterilizacion);
 
@@ -84,7 +94,7 @@ class Usuario {
         localStorage.setItem(`idLote`, lote);
     }
 
-    
+
 
     mostrarResultado() {
 
