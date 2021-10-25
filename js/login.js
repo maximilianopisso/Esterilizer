@@ -8,19 +8,21 @@ if (localStorage.listaUsuarios != null) {
     console.log("CARGA LOCALSTORE - LISTADO USUARIOS");
 }
     
-// } else {
+else {
 
-//     console.log("CARGA POR CODIGO INICIAL");
-//     usuarios = loadInitialData();
-//     localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
-// }
+    console.log("CARGA POR CODIGO INICIAL");
+    usuarios = loadInitialData();
+    localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
+}
     
 console.log(usuarios)
 
 $("#formulario").submit(function (e) {
     e.preventDefault();
-    if (usuarios.length == 0) {
-        usuarios= convertirUsuarios();
+   // if (usuarios.length  == 0) {
+    if (usuarios.length  == 4) {
+        //usuarios= convertirUsuarios();
+        usuarios = usuarios.concat(convertirUsuarios());
         localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
         console.log(usuarios)
     }
