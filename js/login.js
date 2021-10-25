@@ -1,38 +1,49 @@
-usuariosApi();
+
 
 var usuarios = [];
 console.log(usuarios.length)
 
 if (localStorage.listaUsuarios != null) {
     usuarios = recrearBD(`listaUsuarios`);
-    console.log("CARGA LOCALSTORE - LISTADO USUARIOS");
+    console.log("CARGA LOCALSTORE - LISTADO USUARIOS");  //LO MUESTRO PARA QUE PUEDAN USAR LAS CREDENCIALES EN EL LOGIN
+    console.log(usuarios);
 }
     
 else {
-
     console.log("CARGA POR CODIGO INICIAL");
-    usuarios = loadInitialData();
-    localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
-}
-    
-console.log(usuarios)
+    usuarios = loadInitialData();             //ESTE PASO PODRIA EVITARSE, PERO ES PARA USAR UN JUEGO DE USUARIOS DE PRUEBA CONOCIDOS PORQUE LO DE API SON ALEATORIOS
+    console.log("SUMO USUARIOS POR API");
+    concatenarUsuariosAPI();
+} 
+
+
+
 
 $("#formulario").submit(function (e) {
-    e.preventDefault();
-   // if (usuarios.length  == 0) {
-    if (usuarios.length  == 4) {
-        //usuarios= convertirUsuarios();
-        usuarios = usuarios.concat(convertirUsuarios());
-        localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
-        console.log(usuarios)
-    }
     console.log(usuarios)
+    e.preventDefault();
     let email = $("#email").val();
     let pass = $("#password").val();
     //console.log(email, pass);
     validarUsuario(email, pass);
-
+    
 })
+L
+
+/**
+  * Funcion para que pueda sumarse al listado local de usuarios los usuarios obtenidos por la API
+  */
+ async function concatenarUsuariosAPI(){
+      try{
+         const data = await usuariosAspi();
+         usuarios = usuarios.concat(convertirUsuarios())
+      }
+      catch(err){
+        alert("NO SE PUDO CARGAR DATOS POR API")
+     }
+     localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
+     console.log(usuarios) //LO MUESTRO PARA QUE PUEDAN USAR LAS CREDENCIALES EN EL LOGIN
+ }
 
 
 /**
@@ -80,19 +91,19 @@ function validarUsuario(email, password) {
 
             case 1: 
                     if(usuarios[indice_error].nroIntentos == 0){
-                        $("#msjerror").text(`La contraseña es incorrecta. Su usuario fue bloqueado`)
+                        $("#msjerror").html(`La contraseña es incorrecta. Su usuario fue bloqueado`)
                     }else{
-                        $("#msjerror").text(`La contraseña es incorrecta. Nro Intentos: ${usuarios[indice_error].nroIntentos}`)
+                        $("#msjerror").html(`La contraseña es incorrecta. Nro Intentos: ${usuarios[indice_error].nroIntentos}`)
                     }
                 break;
-            case 2:$("#msjerror").text(`El usuario o la contraseña son incorrectos`)
+            case 2:$("#msjerror").html(`El usuario o la contraseña son incorrectos`)
                 break;
-            case 3: $("#msjerror").text(`Tu usuario ha sido BLOQUEADO`)
+            case 3: $("#msjerror").html(`Tu usuario ha sido BLOQUEADO`)
                 break;
         }
-        $("#msjerror").show(500)
+        $("#msjerror").show(100)
                       .delay(5000)
-                      .slideUp(500)
+                      .hide(100)
     }
 }
 
