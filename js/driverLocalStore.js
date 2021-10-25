@@ -1,6 +1,6 @@
 
 function loadInitialData() {
-    console.log("Carga Inicial")
+    console.log("Carga Inicial LOCAL")
     let cargaMovimientos = [];
     //INICIALIZO CON MOVMIENTOS CARGADOS PREVIOS
     for (let i = 1; i < 4; i++) {
@@ -19,7 +19,6 @@ function loadInitialData() {
     return(listadoUsuarios)
     //localStorage.setItem(`listaUsuarios`, JSON.stringify(listadoUsuarios))
 }
-
 
 function usuariosApi() {
     console.log("Carga Por Api")

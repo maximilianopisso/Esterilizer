@@ -1,41 +1,33 @@
+usuariosApi();
 
 var usuarios = [];
-
+console.log(usuarios.length)
 
 if (localStorage.listaUsuarios != null) {
     usuarios = recrearBD(`listaUsuarios`);
     console.log("CARGA LOCALSTORE - LISTADO USUARIOS");
-    
-} else {
-
-    console.log("CARGA POR CODIGO INICIAL");
-    usuarios = loadInitialData();
-    // localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
-    // usuarios = recrearBD(`listaUsuarios`)
-    console.log(usuarios)
-
-    console.log("SUMO USUARIOS POR API");
-    usuarios = usuarios.concat(convertirUsuarios(usuariosApi()));
-    localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
-    
 }
     
-    console.log(usuarios)
-function msjError() {
+// } else {
 
-    $("#msjerror").text("No se pudo logear, el usuario o la contraseña son incorrectas")
-    $("#msjerror").show()
-        .delay(3000)
-        .slideUp(300)
-
-}
+//     console.log("CARGA POR CODIGO INICIAL");
+//     usuarios = loadInitialData();
+//     localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
+// }
+    
+console.log(usuarios)
 
 $("#formulario").submit(function (e) {
     e.preventDefault();
-
+    if (usuarios.length == 0) {
+        usuarios= convertirUsuarios();
+        localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
+        console.log(usuarios)
+    }
+    console.log(usuarios)
     let email = $("#email").val();
     let pass = $("#password").val();
-    console.log(email, pass);
+    //console.log(email, pass);
     validarUsuario(email, pass);
 
 })
