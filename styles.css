@@ -6,49 +6,49 @@
 
 h1{
     
-    font-size: 2.5rem;
+    font-size: 50px;
     color: #2b533d;
     font-weight: bold ;
 }
 
-
-
-
-
-#inicio{
-    margin-top: 5rem;
+.icono-login{
+    width: 20%;
+    
 }
-
-
 
 /* CSS HEADER */
 .estilos-menu {
 
-    background-color: #49946b;
+    background-color: #2a8d56;
     color: white;
     font-weight: bold;
     font-size: 1.3rem;
 }
 
 .nav-link{
-    margin: 0px 5px;
+    font-size: 30px;
+    margin: 0px 10px;
     padding: 5px 15px !important;
     color:white !important;
 }
 
 .nav-link:hover{
-    background-color: #a89ebb;
+    background-color: #3bce7d;
     color:white !important;
-    transition: all 1s;
     border-radius: 5px;
 }
 
 
+
 /* CSS Signin */
 
+#inicio{
+    margin-top: 5rem;
+}
+
 label{
-    color: rgb(56, 56, 56);
-    font-size: 1.3rem;
+    color: rgb(54, 46, 46);
+    font-size: 20px;
     margin-top: 2rem;
     font-weight: bold;
 }
@@ -89,48 +89,7 @@ tr{
         
         
     }
-}
-
-    
-
-
-/* CSS Footer */
-
-footer{
-    background-color: #49946b;
-    
-}
-footer .titulos,a{
-    color: white;
-    font-weight: bold;
-}
-footer p{
-    padding: 11px;
-    color: white;
-}
-footer a:hover{
-    background-color: #a89ebb;
-    color: white;
-    border-radius: 20px;
-    transition: all 0.5s;
-    
-}
-
-footer .fa {
-    display: inline-block;
-    margin: 0 20px;
-    padding: 10px 40px;
-    font-size: 2rem;
-    text-decoration: none;
-    transition: color 1s;
-}
-
-
-.leyenda{
-    font-size: 1.2rem !important;
-    font-weight: normal;
-}
-
+}  
 
 /* CSS Ingreso */
 .fondo{
