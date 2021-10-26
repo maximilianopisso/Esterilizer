@@ -1,44 +1,48 @@
 
+
 var usuarios = [];
 
 
 if (localStorage.listaUsuarios != null) {
     usuarios = recrearBD(`listaUsuarios`);
-    console.log("CARGA LOCALSTORE - LISTADO USUARIOS");
-    
-} else {
-
-    console.log("CARGA POR CODIGO INICIAL");
-    usuarios = loadInitialData();
-    // localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
-    // usuarios = recrearBD(`listaUsuarios`)
-    console.log(usuarios)
-
-    console.log("SUMO USUARIOS POR API");
-    usuarios = usuarios.concat(convertirUsuarios(usuariosApi()));
-    localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
-    
-}
-    
-    console.log(usuarios)
-function msjError() {
-
-    $("#msjerror").text("No se pudo logear, el usuario o la contraseña son incorrectas")
-    $("#msjerror").show()
-        .delay(3000)
-        .slideUp(300)
+    console.log("CARGA LOCALSTORE - LISTADO USUARIOS");  
+    console.log(usuarios); //LO MUESTRO PARA QUE PUEDAN USAR LAS CREDENCIALES EN EL LOGIN
 
 }
+    
+else {
+    console.log("CARGA LOCAL POR CODIGO");
+    usuarios = loadInitialData();             //ESTE PASO PODRIA EVITARSE, PERO ES PARA USAR UN JUEGO DE USUARIOS DE PRUEBA CONOCIDOS PORQUE LO DE API SON ALEATORIOS
+    console.log(usuarios);
+    console.log("SE SUMAN USUARIOS POR API");
+    concatenarUsuariosAPI();
+} 
 
-$("#formulario").submit(function (e) {
+
+$("#formularioLogin").submit(function (e) {
     e.preventDefault();
-
     let email = $("#email").val();
     let pass = $("#password").val();
-    console.log(email, pass);
+    //console.log(email, pass);
     validarUsuario(email, pass);
-
+    
 })
+
+
+/**
+  * Funcion para que pueda sumarse al listado local de usuarios los usuarios obtenidos por la API
+  */
+ async function concatenarUsuariosAPI(){
+      try{
+         const data = await usuariosApi();
+         usuarios = usuarios.concat(convertirUsuarios());
+      }
+      catch(err){
+        alert("NO SE PUDO CARGAR DATOS POR API");
+     }
+     localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
+     console.log(usuarios); //LO MUESTRO PARA QUE PUEDAN USAR LAS CREDENCIALES EN EL LOGIN
+ }
 
 
 /**
@@ -80,25 +84,25 @@ function validarUsuario(email, password) {
         location.href = "./esterilizer.html";
 
     } else {
-        $("#formulario")[0].reset();
+        $("#formularioLogin")[0].reset();
         
         switch (respuesta[1]) {
 
             case 1: 
                     if(usuarios[indice_error].nroIntentos == 0){
-                        $("#msjerror").text(`La contraseña es incorrecta. Su usuario fue bloqueado`)
+                        $("#msjerror").html(`La contraseña es incorrecta. Su usuario fue bloqueado`)
                     }else{
-                        $("#msjerror").text(`La contraseña es incorrecta. Nro Intentos: ${usuarios[indice_error].nroIntentos}`)
+                        $("#msjerror").html(`La contraseña es incorrecta. Nro Intentos: ${usuarios[indice_error].nroIntentos}`)
                     }
                 break;
-            case 2:$("#msjerror").text(`El usuario o la contraseña son incorrectos`)
+            case 2:$("#msjerror").html(`El usuario o la contraseña son incorrectos`)
                 break;
-            case 3: $("#msjerror").text(`Tu usuario ha sido BLOQUEADO`)
+            case 3: $("#msjerror").html(`Tu usuario ha sido BLOQUEADO`)
                 break;
         }
-        $("#msjerror").show(500)
+        $("#msjerror").show(100)
                       .delay(5000)
-                      .slideUp(500)
+                      .hide(100)
     }
 }
 

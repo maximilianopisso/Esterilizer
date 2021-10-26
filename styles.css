@@ -1,164 +1,148 @@
-
 /* CSS General */
-.logo{
-    font-size: 2rem;
+*{
+    margin: 0px;
+  padding: 0px;
+}
+#login{
+
+    background-image: linear-gradient(180deg,#fff 20%, #33ce7942 100%);
 }
 
-h1{
-    
-    font-size: 2.5rem;
-    color: #2b533d;
+
+
+h1{  
+    font-size: 40px;
+    color: #2a6143;
     font-weight: bold ;
 }
 
-h2{
-    font-size: 2.5rem;
-    font-size: bold;
-    color: #213f1d;
-    
+h2{  
+    font-size: 35px;
+    color: #2a6143;
+    font-weight: bold ;
 }
-
-h3{
-    font-size: 1.2rem;
-    color: #213f1d;
-}
-
-
 
 #inicio{
-    margin-top: 5rem;
+    margin: 120px auto;
 }
 
+/* CSS Header */
+.icono-login{
+    width: 20%;
+    
+}
+.logo{
+    font-size: 30px;
+}
 
-
-/* CSS HEADER */
 .estilos-menu {
 
-    background-color: #49946b;
+    background-color: #2a8d56;
     color: white;
     font-weight: bold;
-    font-size: 1.3rem;
+   
 }
-
 .nav-link{
-    margin: 0px 5px;
+    font-size: 20px;
+    margin: 0px 10px;
     padding: 5px 15px !important;
     color:white !important;
 }
-
 .nav-link:hover{
-    background-color: #a89ebb;
+    background-color: #3bce7d;
     color:white !important;
-    transition: all 1s;
     border-radius: 5px;
 }
 
 
-/* CSS Signin */
+/* CSS Login */
+
+#msjerror{  
+    display: none;
+    background-color: rgb(207, 40, 40);
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0px 20px;
+    border-radius: 5px;
+}
+
+#formularioLogin #boton{
+    font-size: 30px;
+    font-weight: 500;
+    background-color: #2a8d56 ;
+    margin-top: 15px;
+}
+
+#formularioLogin input{
+    font-size: 20px;
+    background-color: white;
+    font-weight: 500;
+    color:rgb(48, 47, 47);
+}
+
+#formularioLogin label{
+    font-size: 22px;
+    font-weight: 700;
+    color:rgb(48, 47, 47);
+}
+
+
+
+/* CSS Principal */
+
+/* CSS Login */
+
+#formProcesamiento{
+    display: flex;
+    align-items: center;
+}
+
+#formProcesamiento #calcular{
+    font-size: 30px;
+    font-weight: 500;
+    background-color: #2a8d56 ;
+}
+    
+#formProcesamiento select, #formProcesamiento input {
+    font-size: 20px; 
+    background-color: white;
+    font-weight: 500;
+    color:rgb(48, 47, 47);
+}
+
+#formProcesamiento label{
+    font-size: 22px;
+    font-weight: 700;
+    color:rgb(48, 47, 47);
+}
+
+
+/* MAIN - Esterilizer*/
 
 label{
-    color: rgb(56, 56, 56);
-    font-size: 1.3rem;
+    color: rgb(54, 46, 46);
+    font-size: 10px;
     margin-top: 2rem;
     font-weight: bold;
-}
-#calcular{
-
-font-size: 2rem;
-background-color: #213f1d;
-
 }
 
 /* CSS Tabla */
 
-th{
-    font-size: 2rem;
-    
+#puntaje th{
+    font-weight: 700;
+    font-size: 25px;  
 }
-#detalleResultadoTabla tr{
-    font-weight: bold;
-    font-size: 2rem;
-}
-tr{
-    font-size: 1.5rem;
-    
-    
-}
-
-@media only screen and (max-width: 910px){
-    th{
-        font-size: 1.5rem;
-        
-    }
-    #detalleResultadoTabla tr{
-        font-weight: bold;
-        font-size: 1.5rem;
-    }
-    tr{
-        font-size: 1rem;
-        
-        
-    }
-}
-
-    
-
-
-/* CSS Footer */
-
-footer{
-    background-color: #49946b;
-    
-}
-footer .titulos,a{
-    color: white;
-    font-weight: bold;
-}
-footer p{
-    padding: 11px;
-    color: white;
-}
-footer a:hover{
-    background-color: #a89ebb;
-    color: white;
-    border-radius: 20px;
-    transition: all 0.5s;
-    
-}
-
-footer .fa {
-    display: inline-block;
-    margin: 0 20px;
-    padding: 10px 40px;
-    font-size: 2rem;
-    text-decoration: none;
-    transition: color 1s;
-}
-
-
-.leyenda{
-    font-size: 1.2rem !important;
-    font-weight: normal;
-}
-
-
-/* CSS Ingreso */
-.fondo{
-    background-color: #49946b;
-    background-image: linear-gradient(180deg,#fff 20%, #8842c1 80%);
-  
-}
- 
-#msjerror{
-    
-    display: none;
-    color: rgb(207, 96, 96);
-    font-size: 1.3rem;
+#puntaje tr{
     font-weight: 500;
+    font-size: 25px;
 }
-
-#boton-conteiner{
-    display: block;
-    margin:  0px auto;
-    
+#movimientos th{
+    font-weight: 700;
+    font-size: 20px;
 }
+#movimientos tr{
+    font-weight: 500;
+    font-size: 15px;
+}
+       

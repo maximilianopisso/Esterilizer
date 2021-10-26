@@ -23,39 +23,39 @@ class Usuario {
      * @returns 
      */
     validarLogin(email, password) {
-       
+
         let respuesta = [false, 0]
 
-        
+
         if (this.nroIntentos > 0) {   // Verifica condicion de nro de intentos
 
             if ((this.email == email) && (this.password == password)) {    // Busca coincidencia por mail y contraseña (validacion)
                 respuesta = [true, 0];
                 this.resetNroIntentos();  //reset de numeros de intentos del usuario
-                console.log("El usuario: " + email + " tiene " + (this.nroIntentos) + " intentos restantes");
+                console.log("Al usuario: " + email + " se le restauraron sus " + (this.nroIntentos) + " intentos restantes");
 
-            } else{
-                
-                
-                if ((this.email == email) ) {   // Busca coincidencia por mail (condicion para evaluar nro intentos)
+            } else {
+
+
+                if ((this.email == email)) {   // Busca coincidencia por mail (condicion para evaluar nro intentos)
                     this.nroIntentos -= 1;
                     console.log("El usuario: " + email + " tiene " + (this.nroIntentos) + " intentos restantes");
                     respuesta = [true, 1] // error de contraseña
-                    
-                } else{
 
-                    respuesta = [false,2];      // usuario o contraseña invalidos     
-                }    
-            }       
-        } else {
-                if (this.email == email){
-                    respuesta = [true, 3]       //usuario bloqueado
-                }else{
-                    respuesta = [false,2];      //usuario bloqueado pero no el buscado
+                } else {
+
+                    respuesta = [false, 2];      // usuario o contraseña invalidos     
                 }
+            }
+        } else {
+            if (this.email == email) {
+                respuesta = [true, 3]       //usuario bloqueado
+            } else {
+                respuesta = [false, 2];      //usuario bloqueado pero no el buscado
+            }
 
         }
-        
+
         return respuesta;
     }
 
@@ -66,38 +66,29 @@ class Usuario {
      * @param {*} importe importe a registrar en el movimiento
      * @param {*} cuentaDestino Cuenta con la que se realiza la operacion
      */
-    registrarMovimiento(puntaje, descripcion, cantDias) {
+    registrarMovimiento(fecha, puntaje, descripcion, cantDias) {
 
         //definir descripcion del movimiento
         let lote = JSON.parse(localStorage.getItem(`idLote`));
         //console.log(lote);
         let numUltimoMov = this.movimientos.length + 1;
 
-        //console.log("posicion " + numUltimoMov + " lote: " + lote + " puntaje: " + puntaje + " prcoeso: " + descripcion);
-
         //fecha elaboracion
-        let hoy = new Date();
-        let fechaElaboracion = (hoy.getDay() + "/" + (hoy.getMonth() + 1) + "/" + hoy.getFullYear()) // + " " + hoy.getHours() +":"+ hoy.getMinutes()
 
-        //fecha vencimiento 
-        hoy.setDate(hoy.getDate() + cantDias);
-        let fechaVencimiento = (hoy.getDay() + "/" + (hoy.getMonth() + 1) + "/" + hoy.getFullYear())  //+ " " + hoy.getHours() +":"+ hoy.getMinutes()
+        let fechaElaboracion = formatearFecha(fecha, 0, `/`);
+        let fechaVencimiento = formatearFecha(fecha, cantDias, `/`);
 
         let movEsterilizacion = new Movimiento(numUltimoMov, fechaElaboracion, lote, descripcion, puntaje, cantDias, fechaVencimiento);
-
-        console.log(movEsterilizacion);
+        // console.log(movEsterilizacion);
         this.movimientos.push(movEsterilizacion);
 
-        console.log(this.movimientos)
-
+        //console.log(this.movimientos)
+        // SUMO 1 AL LOTE PARA EL PROXIMO LOTE Y SE GUARDA EN EL LS
         lote += 1;
         localStorage.setItem(`idLote`, lote);
     }
 
-
-
     mostrarResultado() {
-
         let acumulador = ``;
         let ultimoRegistro = this.movimientos.length - 1
 
@@ -108,7 +99,6 @@ class Usuario {
                 </tr>`
 
         document.getElementById(`detalleResultadoTabla`).innerHTML = acumulador;
-
     }
 
     /**
@@ -143,3 +133,5 @@ class Usuario {
         this.nroIntentos = NUMINTENTOS;
     }
 }
+
+

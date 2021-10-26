@@ -1,10 +1,11 @@
 
 function loadInitialData() {
-    console.log("Carga Inicial")
+
+    console.log("Carga Inicial LOCAL")
     let cargaMovimientos = [];
+
     //INICIALIZO CON MOVMIENTOS CARGADOS PREVIOS
     for (let i = 1; i < 4; i++) {
-
         let mov = new Movimiento(i, i + "/10/2020", i + 100, "Evento C.Inicial", i * 15, 15 * i, "01/" + i + "/2020")
         cargaMovimientos.push(mov);
     }
@@ -16,29 +17,30 @@ function loadInitialData() {
 
     listadoUsuarios = [usuario1, usuario2, usuario3, usuario4];
 
-    return(listadoUsuarios)
+    return (listadoUsuarios)
     //localStorage.setItem(`listaUsuarios`, JSON.stringify(listadoUsuarios))
 }
 
+async function usuariosApi() {
 
-function usuariosApi() {
-    console.log("Carga Por Api")
+    var consulta = await $.ajax({
+        
+        url: 'https://randomuser.me/api/',
+        dataType: 'json',
+        data: { results: "20" },
+        success: function (data) {
 
-    if (localStorage.usersAPI == null) {
+            localStorage.setItem(`usersAPI`, JSON.stringify(data.results));
 
-        var consulta = $.ajax({
-            url: 'https://randomuser.me/api/',
-            dataType: 'json',
-            data: { results: "10" },
-            success: function (data) {
-                //console.log(data.results)
-                localStorage.setItem(`usersAPI`, JSON.stringify(data.results));
-            }
-        })
-    }
+        }
+    })
+    
 }
 
-function convertirUsuarios(){
+/**
+ * Convierte el listado de usuarios obtenidos por la API y almacenados en el localStore en un arreglo de Objetos de "Usuarios"
+ */
+function convertirUsuarios() {
     let userlist = JSON.parse(localStorage.getItem(`usersAPI`));
     let sexo = "";
     let listadoUsuario = [];
@@ -55,34 +57,36 @@ function convertirUsuarios(){
 
 }
 
-//FUNCIONES PARA CARGAR EL LOCAL STORE A MEMORIA
 
+/**
+ * FUNCION QUE PERMITE VOLCAR LOS DATOS EN EL LOCALSTORE A MEMORIA EN UN ARREGLO PARA SER PROCESADOOS
+ * @param {*} idLocalStoreitem NOMBRE DE ID EN LOCALSTORE
+ * @returns 
+ */
 function recrearBD(idLocalStoreitem) {
 
-    let users = JSON.parse(localStorage.getItem(`${idLocalStoreitem}`));
-
+    let usersLS = JSON.parse(localStorage.getItem(`${idLocalStoreitem}`));
     let listadoUsuario = [];
     let listadoMovimientos = [];
 
-    for (var i = 0; i < users.length; i++) {
+    for (var i = 0; i < usersLS.length; i++) {
 
-        let movs = users[i].movimientos;
+        let movs = usersLS[i].movimientos;
 
         for (var j = 0; j < movs.length; j++) {
             let movimientos = new Movimiento(movs[j].id, movs[j].fecha, movs[j].lote, movs[j].proceso, movs[j].puntaje, movs[j].diasEsteriles, movs[j].vencimiento)
             listadoMovimientos.push(movimientos);
         }
-
         //CREO NUEVO USUARIO CON LOS DATOS COMPLETOS
-        let usuarioNuevo = new Usuario(users[i].nombre, users[i].apellido, users[i].email, users[i].password, users[i].contacto, users[i].sexo, listadoMovimientos)
-        usuarioNuevo.nroIntentos = users[i].nroIntentos;
+        let usuarioNuevo = new Usuario(usersLS[i].nombre, usersLS[i].apellido, usersLS[i].email, usersLS[i].password, usersLS[i].contacto, usersLS[i].sexo, listadoMovimientos)
+        usuarioNuevo.nroIntentos = usersLS[i].nroIntentos;  //Setea los intentos de inicio del usuario desde LS
+
         //AGREGO USUARIO A LISTA DE USUARIOS
         listadoUsuario.push(usuarioNuevo);
+
         //BORRO LISTADO DE MOVIMIENTOS PARA PROXIMO USUSARIO
         listadoMovimientos = [];
-
     }
-
     return listadoUsuario;
 
 }
