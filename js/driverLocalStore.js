@@ -6,7 +6,7 @@ function loadInitialData() {
 
     //INICIALIZO CON MOVMIENTOS CARGADOS PREVIOS
     for (let i = 1; i < 4; i++) {
-        let mov = new Movimiento(i, i + "/10/2020", i + 100, "Evento C.Inicial", i * 15, 15 * i, "01/" + i + "/2020")
+        let mov = new Movimiento(i, `xx/xx/xxxx`, 2500+i, "Proceso C. Inicial", 820, 1826, "0"+i +"/0" + i + "/2021")
         cargaMovimientos.push(mov);
     }
 
@@ -31,10 +31,8 @@ async function usuariosApi() {
         success: function (data) {
 
             localStorage.setItem(`usersAPI`, JSON.stringify(data.results));
-
         }
     })
-    
 }
 
 /**
@@ -54,9 +52,7 @@ function convertirUsuarios() {
     }
 
     return listadoUsuario;
-
 }
-
 
 /**
  * FUNCION QUE PERMITE VOLCAR LOS DATOS EN EL LOCALSTORE A MEMORIA EN UN ARREGLO PARA SER PROCESADOOS
@@ -88,5 +84,4 @@ function recrearBD(idLocalStoreitem) {
         listadoMovimientos = [];
     }
     return listadoUsuario;
-
 }

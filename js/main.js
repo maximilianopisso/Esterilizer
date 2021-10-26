@@ -34,18 +34,11 @@ usuarioLogeado.mostrarMovimientos();
 $("#formProcesamiento").submit(function (e) {
     e.preventDefault();
     let datosForm = document.querySelectorAll(".form-select")
-  
-    let env1 = datosForm[0].value;
-    let env2 = datosForm[1].value;
-    let emb = datosForm[2].value;
-    let mAlm = datosForm[3].value;
-    let lAlm = datosForm[4].value;
     let fecha = convertirFecha(datosForm[5].value);
 
-    //console.log(fecha,env1, env2, emb, mAlm, lAlm);
     location.href = "#puntaje";
 
-    let resultado = calcularPuntajeProceso(env1, env2, emb, mAlm, lAlm);
+    let resultado = calcularPuntajeProceso(datosForm[0].value, datosForm[1].value, datosForm[2].value, datosForm[3].value, datosForm[4].value);
     let diasEsteriles = calcularDiasEsterilidad(resultado[0]);
 
     usuarioLogeado.registrarMovimiento(fecha, resultado[0], resultado[1], diasEsteriles);
@@ -54,12 +47,13 @@ $("#formProcesamiento").submit(function (e) {
 
     usuarios[indexUserLogin] = usuarioLogeado; //guardo cambios del usuario en listado de usuarios en memoria
 
-
     localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios))   // guardo cambios en el local Store
 
     $("#formProcesamiento")[0].reset();   //reseteo formulario
     $("#dia").val(formatearFecha(fechaHoy, 0, `-`)); // vuelvo a inicializar el campo de la fecha al dia de hoy
 });
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 /**
  * Funcion que me calcula el puntaje del procesamiento escogido en el formulario
@@ -170,7 +164,6 @@ function calcularPuntajeProceso(envoltorio1, envoltorio2, embalaje, medioAlm, lu
     }
 
     //PUNTAJE LUGAR ALMACENAMIENTO
-
     switch (lugarAlm) {
         case "Habitacion del Paciente":
             puntaje += 300
@@ -242,7 +235,11 @@ function calcularDiasEsterilidad(puntaje) {
 
     return diasVenc;
 }
-
+/**
+ * Tomar como paramarto una fecha en formato String y devuelve la fecha en instacianda como un objeto Date 
+ * @param {*} dateString  fecha en formato String
+ * @returns fecha en objeto Date
+ */
 function convertirFecha(dateString) {
 
     let dia = parseInt(dateString.substring(8, 10));

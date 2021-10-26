@@ -23,7 +23,6 @@ $("#formularioLogin").submit(function (e) {
     e.preventDefault();
     let email = $("#email").val();
     let pass = $("#password").val();
-    //console.log(email, pass);
     validarUsuario(email, pass);
     
 })
@@ -100,7 +99,7 @@ function validarUsuario(email, password) {
             case 3: $("#msjerror").html(`Tu usuario ha sido BLOQUEADO`)
                 break;
         }
-        $("#msjerror").show(100)
+        $("#msjerror").show(50)
                       .delay(5000)
                       .hide(100)
     }
