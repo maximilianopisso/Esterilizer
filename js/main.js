@@ -4,10 +4,10 @@ console.log("MAIN - LISTADO CARGADO DESDE LOCALSTORE");
 console.log(usuarios)
 
 // SETEO INICIAL DE NUMERO DE LOTE (Si no existe en el Local, se inicializa con el valor por defecto)
-const LOTEO =2545;
+const LOTEO = 2545;
 
 if (localStorage.idLote == null) {
-    localStorage.setItem(`idLote`,LOTEO) 
+    localStorage.setItem(`idLote`, LOTEO)
 }
 
 // OBTENGO INDICE DEL USUARIO QUE SE LOGEO DEL LISTADO DE USUARIOS
@@ -17,8 +17,8 @@ let indexUserLogin = parseInt(localStorage.getItem("userID"));
 let usuarioLogeado = usuarios[indexUserLogin]; // TENGO QUE VER LA FORMA DE OBTENERLO DEL LOGIN con el localStorage
 
 // FORMATEAR FORMULARIO CON FECHA ACTUAL
-let fechaHoy=new Date();
-$("#dia").val(formatearFecha(fechaHoy,0,`-`));
+let fechaHoy = new Date();
+$("#dia").val(formatearFecha(fechaHoy, 0, `-`));
 
 //SALUDO DE BIENVENIDA
 if (usuarioLogeado.sexo === `M`) {
@@ -33,30 +33,32 @@ usuarioLogeado.mostrarMovimientos();
 
 $("#formProcesamiento").submit(function (e) {
     e.preventDefault();
-    let fecha = convertirFecha($("#dia").val());
-    let env1 = $("#envoltorio1").val();
-    let env2 = $("#envoltorio2").val();
-    let emb = $("#embalaje").val();
-    let mAlm = $("#mAlmacenamiento").val();
-    let lAlm = $("#lAlmacenamiento").val();
-    
+    let datosForm = document.querySelectorAll(".form-select")
+  
+    let env1 = datosForm[0].value;
+    let env2 = datosForm[1].value;
+    let emb = datosForm[2].value;
+    let mAlm = datosForm[3].value;
+    let lAlm = datosForm[4].value;
+    let fecha = convertirFecha(datosForm[5].value);
+
     //console.log(fecha,env1, env2, emb, mAlm, lAlm);
     location.href = "#puntaje";
-    
+
     let resultado = calcularPuntajeProceso(env1, env2, emb, mAlm, lAlm);
     let diasEsteriles = calcularDiasEsterilidad(resultado[0]);
-    
-    usuarioLogeado.registrarMovimiento(fecha,resultado[0], resultado[1], diasEsteriles);
-    usuarioLogeado.mostrarResultado();
-    usuarioLogeado.mostrarMovimientos();     
 
-    usuarios[indexUserLogin]=usuarioLogeado; //guardo cambios del usuario en listado de usuarios en memoria
-    
-        
+    usuarioLogeado.registrarMovimiento(fecha, resultado[0], resultado[1], diasEsteriles);
+    usuarioLogeado.mostrarResultado();
+    usuarioLogeado.mostrarMovimientos();
+
+    usuarios[indexUserLogin] = usuarioLogeado; //guardo cambios del usuario en listado de usuarios en memoria
+
+
     localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios))   // guardo cambios en el local Store
-    
+
     $("#formProcesamiento")[0].reset();   //reseteo formulario
-    $("#dia").val(formatearFecha(fechaHoy,0,`-`)); // vuelvo a inicializar el campo de la fecha al dia de hoy
+    $("#dia").val(formatearFecha(fechaHoy, 0, `-`)); // vuelvo a inicializar el campo de la fecha al dia de hoy
 });
 
 /**
@@ -240,15 +242,15 @@ function calcularDiasEsterilidad(puntaje) {
 
     return diasVenc;
 }
-                              
-function convertirFecha (dateString){    
-    
-    let dia = parseInt(dateString.substring(8,10));
-    let mes = parseInt(dateString.substring(5,7));
-    let año = parseInt(dateString.substring(0,4));
 
-    let date = new Date (año,mes-1,dia)
-    
+function convertirFecha(dateString) {
+
+    let dia = parseInt(dateString.substring(8, 10));
+    let mes = parseInt(dateString.substring(5, 7));
+    let año = parseInt(dateString.substring(0, 4));
+
+    let date = new Date(año, mes - 1, dia)
+
     return date
 }
 
@@ -259,7 +261,7 @@ function convertirFecha (dateString){
  * @param {*} tipo  seleccionar distinto tipo de formatos : separador / (mm/dd/yyy)  separador - (yyyy-mm-dd)
  * @returns 
  */
- function formatearFecha(fecha, cantDias, tipo) {
+function formatearFecha(fecha, cantDias, tipo) {
 
     let dia = ""
     let mes = ""
