@@ -9,7 +9,7 @@ function loadInitialData() {
         let mov = new Movimiento(i, i + "/10/2020", i + 100, "Evento C.Inicial", i * 15, 15 * i, "01/" + i + "/2020")
         cargaMovimientos.push(mov);
     }
-    
+
     const usuario1 = new Usuario(`Maximiliano`, `Pisso`, `mpisso@gmail.com`, `12345678`, `3413346634`, `M`, cargaMovimientos);
     const usuario2 = new Usuario(`Tamara`, `Sultano`, `tsultano@gmail.com`, `qwer1234`, `3416748545`, `F`, cargaMovimientos);
     const usuario3 = new Usuario(`Maria Laura`, `Gomez`, `mgomez@gmail.com`, `loki1374`, `3416548562`, `F`, cargaMovimientos);
@@ -22,20 +22,19 @@ function loadInitialData() {
 }
 
 async function usuariosApi() {
-  
-    if (localStorage.usersAPI == null) {
 
-        var consulta = await $.ajax({
-            url: 'https://randomuser.me/api/',
-            dataType: 'json',
-            data: { results: "10" },
-            success: function (data) {
-             
-                localStorage.setItem(`usersAPI`, JSON.stringify(data.results));
-                return data;
-            }
-        })    
-    }
+    var consulta = await $.ajax({
+        
+        url: 'https://randomuser.me/api/',
+        dataType: 'json',
+        data: { results: "20" },
+        success: function (data) {
+
+            localStorage.setItem(`usersAPI`, JSON.stringify(data.results));
+
+        }
+    })
+    
 }
 
 /**
@@ -81,10 +80,10 @@ function recrearBD(idLocalStoreitem) {
         //CREO NUEVO USUARIO CON LOS DATOS COMPLETOS
         let usuarioNuevo = new Usuario(usersLS[i].nombre, usersLS[i].apellido, usersLS[i].email, usersLS[i].password, usersLS[i].contacto, usersLS[i].sexo, listadoMovimientos)
         usuarioNuevo.nroIntentos = usersLS[i].nroIntentos;  //Setea los intentos de inicio del usuario desde LS
-       
+
         //AGREGO USUARIO A LISTA DE USUARIOS
         listadoUsuario.push(usuarioNuevo);
-        
+
         //BORRO LISTADO DE MOVIMIENTOS PARA PROXIMO USUSARIO
         listadoMovimientos = [];
     }

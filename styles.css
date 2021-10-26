@@ -1,37 +1,53 @@
-
 /* CSS General */
-.logo{
-    font-size: 50px;
+*{
+    margin: 0px;
+  padding: 0px;
+}
+#login{
+
+    background-image: linear-gradient(180deg,#fff 20%, #33ce7942 100%);
 }
 
-h1{
-    
-    font-size: 50px;
-    color: #2b533d;
+
+
+h1{  
+    font-size: 40px;
+    color: #2a6143;
     font-weight: bold ;
 }
 
+h2{  
+    font-size: 35px;
+    color: #2a6143;
+    font-weight: bold ;
+}
+
+#inicio{
+    margin: 120px auto;
+}
+
+/* CSS Header */
 .icono-login{
     width: 20%;
     
 }
+.logo{
+    font-size: 30px;
+}
 
-/* CSS HEADER */
 .estilos-menu {
 
     background-color: #2a8d56;
     color: white;
     font-weight: bold;
-    font-size: 1.3rem;
+   
 }
-
 .nav-link{
-    font-size: 30px;
+    font-size: 20px;
     margin: 0px 10px;
     padding: 5px 15px !important;
     color:white !important;
 }
-
 .nav-link:hover{
     background-color: #3bce7d;
     color:white !important;
@@ -39,84 +55,94 @@ h1{
 }
 
 
+/* CSS Login */
 
-/* CSS Signin */
-
-#inicio{
-    margin-top: 5rem;
+#msjerror{  
+    display: none;
+    background-color: rgb(207, 40, 40);
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0px 20px;
+    border-radius: 5px;
 }
+
+#formularioLogin #boton{
+    font-size: 30px;
+    font-weight: 500;
+    background-color: #2a8d56 ;
+    margin-top: 15px;
+}
+
+#formularioLogin input{
+    font-size: 20px;
+    background-color: white;
+    font-weight: 500;
+    color:rgb(48, 47, 47);
+}
+
+#formularioLogin label{
+    font-size: 22px;
+    font-weight: 700;
+    color:rgb(48, 47, 47);
+}
+
+
+
+/* CSS Principal */
+
+/* CSS Login */
+
+#formProcesamiento{
+    display: flex;
+    align-items: center;
+}
+
+#formProcesamiento #calcular{
+    font-size: 30px;
+    font-weight: 500;
+    background-color: #2a8d56 ;
+}
+    
+#formProcesamiento select, #formProcesamiento input {
+    font-size: 20px; 
+    background-color: white;
+    font-weight: 500;
+    color:rgb(48, 47, 47);
+}
+
+#formProcesamiento label{
+    font-size: 22px;
+    font-weight: 700;
+    color:rgb(48, 47, 47);
+}
+
+
+/* MAIN - Esterilizer*/
 
 label{
     color: rgb(54, 46, 46);
-    font-size: 20px;
+    font-size: 10px;
     margin-top: 2rem;
     font-weight: bold;
-}
-#calcular{
-
-font-size: 2rem;
-background-color: #213f1d;
-
 }
 
 /* CSS Tabla */
 
-th{
-    font-size: 2rem;
-    
-}
-#detalleResultadoTabla tr{
-    font-weight: bold;
-    font-size: 2rem;
-}
-tr{
-    font-size: 1.5rem;
-    
-    
-}
-
-@media only screen and (max-width: 910px){
-    th{
-        font-size: 1.5rem;
-        
-    }
-    #detalleResultadoTabla tr{
-        font-weight: bold;
-        font-size: 1.5rem;
-    }
-    tr{
-        font-size: 1rem;
-        
-        
-    }
-}  
-
-/* CSS Ingreso */
-.fondo{
-    background-color: #49946b;
-    background-image: linear-gradient(180deg,#fff 20%, #8842c1 80%);
-  
-}
- 
-#msjerror{
-   
-    display: none;
-    color: rgb(207, 96, 96);
-    font-size: 22px;
-    font-weight: 500;
-}
-
-#boton{
-    font-size: 30px;
-}
-
-
-#formulario input{
-    font-size: 30px;
-    font-weight: 500;
-}
-
-#formulario label{
-    font-size: 25px;
+#puntaje th{
     font-weight: 700;
+    font-size: 25px;  
 }
+#puntaje tr{
+    font-weight: 500;
+    font-size: 25px;
+}
+#movimientos th{
+    font-weight: 700;
+    font-size: 20px;
+}
+#movimientos tr{
+    font-weight: 500;
+    font-size: 15px;
+}
+       

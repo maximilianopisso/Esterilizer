@@ -66,32 +66,29 @@ class Usuario {
      * @param {*} importe importe a registrar en el movimiento
      * @param {*} cuentaDestino Cuenta con la que se realiza la operacion
      */
-    registrarMovimiento(puntaje, descripcion, cantDias) {
+    registrarMovimiento(fecha, puntaje, descripcion, cantDias) {
 
         //definir descripcion del movimiento
         let lote = JSON.parse(localStorage.getItem(`idLote`));
         //console.log(lote);
         let numUltimoMov = this.movimientos.length + 1;
-        
+
         //fecha elaboracion
-        let hoy = new Date();
-        let fechaElaboracion =  formatearFecha(hoy,0);
-        let fechaVencimiento = formatearFecha(hoy,cantDias);
+
+        let fechaElaboracion = formatearFecha(fecha, 0, `/`);
+        let fechaVencimiento = formatearFecha(fecha, cantDias, `/`);
 
         let movEsterilizacion = new Movimiento(numUltimoMov, fechaElaboracion, lote, descripcion, puntaje, cantDias, fechaVencimiento);
-       // console.log(movEsterilizacion);
+        // console.log(movEsterilizacion);
         this.movimientos.push(movEsterilizacion);
 
         //console.log(this.movimientos)
-
+        // SUMO 1 AL LOTE PARA EL PROXIMO LOTE Y SE GUARDA EN EL LS
         lote += 1;
         localStorage.setItem(`idLote`, lote);
     }
 
-
-
     mostrarResultado() {
-
         let acumulador = ``;
         let ultimoRegistro = this.movimientos.length - 1
 
@@ -102,7 +99,6 @@ class Usuario {
                 </tr>`
 
         document.getElementById(`detalleResultadoTabla`).innerHTML = acumulador;
-
     }
 
     /**
@@ -138,29 +134,4 @@ class Usuario {
     }
 }
 
-function formatearFecha(fecha, cantDias) {
 
-    let dia =""
-    let mes = ""
-    let resultado = "";
-
-    var diaACalcular = new Date(fecha);
-    diaACalcular.setDate(diaACalcular.getDate() + cantDias);
-       
-
-    if ((diaACalcular.getMonth() + 1) < 10) {
-        mes = `0${diaACalcular.getMonth() + 1}`
-    } else {
-        mes = `${ diaACalcular.getMonth() + 1}`;
-    }
-
-    if (diaACalcular.getdiaACalcular < 10) {
-        dia = `0${diaACalcular.getDate()}`
-    } else {
-        dia = `${ diaACalcular.getDate()}`;
-    }
-    
-    resultado =  (`${dia} / ${mes} / ${diaACalcular.getFullYear()}`) ;
-    return resultado;
-}
-    

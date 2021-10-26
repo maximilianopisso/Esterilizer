@@ -1,26 +1,25 @@
 
 
 var usuarios = [];
-console.log(usuarios.length)
+
 
 if (localStorage.listaUsuarios != null) {
     usuarios = recrearBD(`listaUsuarios`);
-    console.log("CARGA LOCALSTORE - LISTADO USUARIOS");  //LO MUESTRO PARA QUE PUEDAN USAR LAS CREDENCIALES EN EL LOGIN
-    console.log(usuarios);
+    console.log("CARGA LOCALSTORE - LISTADO USUARIOS");  
+    console.log(usuarios); //LO MUESTRO PARA QUE PUEDAN USAR LAS CREDENCIALES EN EL LOGIN
+
 }
     
 else {
-    console.log("CARGA POR CODIGO INICIAL");
+    console.log("CARGA LOCAL POR CODIGO");
     usuarios = loadInitialData();             //ESTE PASO PODRIA EVITARSE, PERO ES PARA USAR UN JUEGO DE USUARIOS DE PRUEBA CONOCIDOS PORQUE LO DE API SON ALEATORIOS
-    console.log("SUMO USUARIOS POR API");
+    console.log(usuarios);
+    console.log("SE SUMAN USUARIOS POR API");
     concatenarUsuariosAPI();
 } 
 
 
-
-
-$("#formulario").submit(function (e) {
-    console.log(usuarios)
+$("#formularioLogin").submit(function (e) {
     e.preventDefault();
     let email = $("#email").val();
     let pass = $("#password").val();
@@ -28,21 +27,21 @@ $("#formulario").submit(function (e) {
     validarUsuario(email, pass);
     
 })
-L
+
 
 /**
   * Funcion para que pueda sumarse al listado local de usuarios los usuarios obtenidos por la API
   */
  async function concatenarUsuariosAPI(){
       try{
-         const data = await usuariosAspi();
-         usuarios = usuarios.concat(convertirUsuarios())
+         const data = await usuariosApi();
+         usuarios = usuarios.concat(convertirUsuarios());
       }
       catch(err){
-        alert("NO SE PUDO CARGAR DATOS POR API")
+        alert("NO SE PUDO CARGAR DATOS POR API");
      }
      localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios));
-     console.log(usuarios) //LO MUESTRO PARA QUE PUEDAN USAR LAS CREDENCIALES EN EL LOGIN
+     console.log(usuarios); //LO MUESTRO PARA QUE PUEDAN USAR LAS CREDENCIALES EN EL LOGIN
  }
 
 
@@ -85,7 +84,7 @@ function validarUsuario(email, password) {
         location.href = "./esterilizer.html";
 
     } else {
-        $("#formulario")[0].reset();
+        $("#formularioLogin")[0].reset();
         
         switch (respuesta[1]) {
 

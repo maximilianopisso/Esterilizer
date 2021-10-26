@@ -31,7 +31,7 @@
 </head>
 
 
-<body>
+<body id="login">
   <!-- header fixed-top"-->
   <nav class="navbar navbar-expand-lg navbar-dark estilos-menu">
     <div class="container-fluid">
@@ -47,17 +47,16 @@
 
   <section id="inicio" class="container">
 
-    <div class="row align-items-center ">
-      <div class="col-lg-12 d-flex justify-content-center py-5">
+    <div class="row d-flex align-items-center ">
+      <div class="col-lg-12 d-flex justify-content-center">
         <h1>Iniciar Sesion</h1>
       </div>
-      <img src="./images/icono-login.png" class="d-block mx-auto py-3 icono-login" alt="Icono que representa a un usuario">  
+      <img src="./images/icono-login.png" class="d-block mx-auto pt-5 icono-login" alt="Icono que representa a un usuario">  
     </div>
 
-    <div class="row justify-content-center pb-5 mb-5">
+    <div class="row justify-content-center ">
       <div class="col-lg-6">
-        
-        <form id="formulario" class="row d-grid g-3 pt-4">
+          <form id="formularioLogin" class="row d-grid g-3 pt-4">
           <div class="col-12">
             <label for="inputEmail4" class="form-label">Email</label>
             <input type="email" class="form-control" name="mail" id="email" required>
@@ -67,22 +66,21 @@
             <label for="inputPassword4" class="form-label">Password</label>
             <input type="text" class="form-control" name="password" id="password" required>
           </div>
-          <div class="col-12 mb-5">
+          <div class="col-12  my-4">
             <span id="msjerror"></span>
           </div>
-          <div class="col-12 mt-5 d-flex justify-content-center" id="boton-conteiner">
+          <div class="col-12 d-flex justify-content-center" id="boton-conteiner">
             <button id="boton" type="submit" class="btn btn-primary">Ingresar</button>
           </div>
 
         </form>
-        
+        <!-- <button id="boton" onclick="usuariosApi()">HOLA</button> -->
       </div>
       
     </div>
     </div>
   </section>
-
-  W
+  <footer></footer>
 
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"

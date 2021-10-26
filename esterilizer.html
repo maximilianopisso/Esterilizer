@@ -29,7 +29,7 @@
 
 </head>
 
-<body>
+<body id="esterilizer">
 
   <!-- header fixed-top"-->
   <nav class="navbar navbar-expand-lg navbar-dark estilos-menu">
@@ -51,14 +51,14 @@
   <!-- inicio -->
   <section id="inicio" class="container">
     <h1 id="msjBienvenida" class="pt-2">Bienvenido:</h1>
-
     <h3 class="mt-5">Seleccionar método del procesamiento de material</h3>
 
     <div class="row align-items-center pb-5 mb-5">
       <form id="formProcesamiento" class="row g-3">
         <!-- aca habia un form -->
-
-        <div class="col-lg-6 mx-auto ">
+       
+        
+        <div class="col-lg-5 mx-auto ">
           <label for="inputState" class="form-label">Envoltorio 1</label>
           <select id="envoltorio1" class="form-select" required>
             <option></option>
@@ -71,7 +71,7 @@
           </select>
         </div>
 
-        <div class="col-lg-6 col-md-12  mx-auto">
+        <div class="col-lg-5 col-md-12  mx-auto">
           <label for="inputState" class="form-label">Envoltorio 2</label>
           <select id="envoltorio2" class="form-select" required>
             <option></option>
@@ -84,7 +84,7 @@
           </select>
         </div>
 
-        <div class="col-lg-6 col-md-12 mx-auto">
+        <div class="col-lg-5 col-md-12 mx-auto">
           <label for="inputState" class="form-label">Embalaje de Proteccion</label>
           <select id="embalaje" class="form-select" required>
             <option></option>
@@ -94,7 +94,7 @@
           </select>
         </div>
 
-        <div class="col-lg-6 col-md-12 mx-auto">
+        <div class="col-lg-5 col-md-12 mx-auto">
           <label for="inputState" class="form-label">Medio de Almacenamiento</label>
           <select id="mAlmacenamiento" class="form-select" required>
             <option></option>
@@ -104,7 +104,7 @@
           </select>
         </div>
 
-        <div class="col-lg-6 col-md-12 mx-auto ">
+        <div class="col-lg-5 col-md-12 mx-auto ">
           <label for="inputState" class="form-label">Lugar de Almacenamiento</label>
           <select id="lAlmacenamiento" class="form-select" required>
             <option></option>
@@ -116,15 +116,18 @@
           </select>
         </div>
 
-        <div class="col-lg-6 col-md-12 text-center mt-5 pt-5">
+        <div class="col-lg-5 col-md-12 mx-auto ">
+          <label for="inputState" class="form-label">Fecha Elaboración </label>
+          <input type="date" id="dia" class="form-select" name="" min="2021-01-01" max="2050-12-31" value="" required>
+        </div>
+
+        <div class="col-lg-12 col-md-12 text-center mt-5 pt-5">
           <button id="calcular" type="submit" href="#puntaje" class="btn btn-primary">Calcular Vencimiento</button>
           <!-- <button id="resetForm" type="submit" href="#puntaje" class="btn btn-danger">Reset</button> -->
         </div>
-      </form>      
+      </form>
     </div>
-  
 
-    </div>
     <div id="puntaje" class="row align-items-start ">
       <div class="col-12">
         <div>
@@ -147,26 +150,25 @@
           </table>
         </div>
       </div>
+    </div>
 
-      <div id="movimientos" class="col-12 p-4">
-        <h2>Movimientos</h2>
-        <table class="table table-hover text-center">
-          <thead id="encabezadoMovTabla">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Lote</th>
-              <th scope="col">Proceso</th>
-              <th scope="col">Puntos</th>
-              <th scope="col">Esterilidad</th>
-              <th scope="col">F.Venc.</th>
-            </tr>
-          </thead>
-          <tbody id="detalleMovTabla">
-          </tbody>
-        </table>
-
-      </div>
+    <div id="movimientos" class="col-12 pt-4">
+      <h2>Movimientos</h2>
+      <table class="table table-hover text-center">
+        <thead id="encabezadoMovTabla">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">F.Elab.</th>
+            <th scope="col">Lote</th>
+            <th scope="col">Proceso</th>
+            <th scope="col">Puntos</th>
+            <th scope="col">Esterilidad</th>
+            <th scope="col">F.Venc.</th>
+          </tr>
+        </thead>
+        <tbody id="detalleMovTabla">
+        </tbody>
+      </table>
     </div>
   </section>
 

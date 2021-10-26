@@ -16,6 +16,9 @@ let indexUserLogin = parseInt(localStorage.getItem("userID"));
 // INICIALIZO AL USUARIO LOGEADO
 let usuarioLogeado = usuarios[indexUserLogin]; // TENGO QUE VER LA FORMA DE OBTENERLO DEL LOGIN con el localStorage
 
+// FORMATEAR FORMULARIO CON FECHA ACTUAL
+let fechaHoy=new Date();
+$("#dia").val(formatearFecha(fechaHoy,0,`-`));
 
 //SALUDO DE BIENVENIDA
 if (usuarioLogeado.sexo === `M`) {
@@ -23,33 +26,37 @@ if (usuarioLogeado.sexo === `M`) {
 } else {
     document.getElementById(`msjBienvenida`).innerHTML = `<h1>Bienvenida, ${usuarioLogeado.nombre} ${usuarioLogeado.apellido} <h1>`;
 }
+
 // MUESTRO LOS MOVIMIENTOS ANTERIORES
 usuarioLogeado.mostrarMovimientos();
 
+
 $("#formProcesamiento").submit(function (e) {
     e.preventDefault();
+    let fecha = convertirFecha($("#dia").val());
     let env1 = $("#envoltorio1").val();
     let env2 = $("#envoltorio2").val();
     let emb = $("#embalaje").val();
     let mAlm = $("#mAlmacenamiento").val();
     let lAlm = $("#lAlmacenamiento").val();
     
-    console.log(env1, env2, emb, mAlm, lAlm);
+    //console.log(fecha,env1, env2, emb, mAlm, lAlm);
     location.href = "#puntaje";
     
     let resultado = calcularPuntajeProceso(env1, env2, emb, mAlm, lAlm);
     let diasEsteriles = calcularDiasEsterilidad(resultado[0]);
     
-    usuarioLogeado.registrarMovimiento(resultado[0], resultado[1], diasEsteriles);
+    usuarioLogeado.registrarMovimiento(fecha,resultado[0], resultado[1], diasEsteriles);
     usuarioLogeado.mostrarResultado();
     usuarioLogeado.mostrarMovimientos();     
 
     usuarios[indexUserLogin]=usuarioLogeado; //guardo cambios del usuario en listado de usuarios en memoria
-    console.log(usuarios);
+    
         
     localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios))   // guardo cambios en el local Store
     
     $("#formProcesamiento")[0].reset();   //reseteo formulario
+    $("#dia").val(formatearFecha(fechaHoy,0,`-`)); // vuelvo a inicializar el campo de la fecha al dia de hoy
 });
 
 /**
@@ -59,7 +66,7 @@ $("#formProcesamiento").submit(function (e) {
  * @param {*} embalaje : tipo de embalaje
  * @param {*} medioAlm : tipo madio de almacenamiento
  * @param {*} lugarAlm : tipo lugar de almacenamiento
- * @returns Devuelve el puntaje total
+ * @returns Devuelve el puntaje total(array[0]) y la descripcion del proceso escogido (array[1])
  */
 function calcularPuntajeProceso(envoltorio1, envoltorio2, embalaje, medioAlm, lugarAlm) {
 
@@ -233,4 +240,55 @@ function calcularDiasEsterilidad(puntaje) {
 
     return diasVenc;
 }
+                              
+function convertirFecha (dateString){    
+    
+    let dia = parseInt(dateString.substring(8,10));
+    let mes = parseInt(dateString.substring(5,7));
+    let año = parseInt(dateString.substring(0,4));
 
+    let date = new Date (año,mes-1,dia)
+    
+    return date
+}
+
+/**
+ * FUNCION QUE FORMATEA UN OBJETO DATE PARA QUE VISUALMENTE SE PRESENTE DE LA FOTMA dd-mm-yyyy
+ * @param {*} fecha  objeto Date de entrada para formatear
+ * @param {*} cantDias  parametro para sumarle dias a la fecha ingresada con el parametro anterior 
+ * @param {*} tipo  seleccionar distinto tipo de formatos : separador / (mm/dd/yyy)  separador - (yyyy-mm-dd)
+ * @returns 
+ */
+ function formatearFecha(fecha, cantDias, tipo) {
+
+    let dia = ""
+    let mes = ""
+    let resultado = "";
+
+    let diaACalcular = new Date(fecha);
+    diaACalcular.setDate(diaACalcular.getDate() + cantDias);
+
+    if ((diaACalcular.getMonth() + 1) < 10) {
+        mes = `0${diaACalcular.getMonth() + 1}`
+    } else {
+        mes = `${diaACalcular.getMonth() + 1}`;
+    }
+
+    if (diaACalcular.getDate() < 10) {
+        dia = `0${diaACalcular.getDate()}`
+    } else {
+        dia = `${diaACalcular.getDate()}`;
+    }
+
+    switch (tipo) {
+
+        case `/`:
+            resultado = (`${dia}/${mes}/${diaACalcular.getFullYear()}`);
+            break;
+        case `-`:
+            resultado = (`${diaACalcular.getFullYear()}-${mes}-${dia}`);
+            break;
+    }
+
+    return resultado;
+}
