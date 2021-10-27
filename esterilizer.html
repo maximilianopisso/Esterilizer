@@ -32,14 +32,25 @@
 <body id="esterilizer">
 
   <!-- header fixed-top"-->
-  <header class="estilos-menu">
+  <!-- <header class="estilos-menu">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="container-fluid">
         <a class="navbar-brand logo" href="./index.html">Esterilizer</a>
       </div>
     </nav>
+  </header> -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark estilos-menu">
+      <div class="container-fluid">
+          <a class="navbar-brand logo" href="/index.html">Esterilizer</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="./index.html">Cerrar Sesion</a>
+                </li>
+            </ul>
+      </div>
+    </nav>
   </header>
-
 
   <!-- inicio -->
   <section id="inicio" class="container">
@@ -49,8 +60,8 @@
     <div class="row align-items-center pb-5 mb-5">
       <form id="formProcesamiento" class="row g-3">
         <!-- aca habia un form -->
-       
-        
+
+
         <div class="col-lg-5 mx-auto ">
           <label for="inputState" class="form-label">Envoltorio 1</label>
           <select id="envoltorio1" class="form-select" required>
