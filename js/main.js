@@ -4,10 +4,10 @@ console.log("MAIN - LISTADO CARGADO DESDE LOCALSTORE");
 console.log(usuarios)
 
 // SETEO INICIAL DE NUMERO DE LOTE (Si no existe en el Local, se inicializa con el valor por defecto)
-const LOTEO =2545;
+const LOTEO = 2545;
 
 if (localStorage.idLote == null) {
-    localStorage.setItem(`idLote`,LOTEO) 
+    localStorage.setItem(`idLote`, LOTEO)
 }
 
 // OBTENGO INDICE DEL USUARIO QUE SE LOGEO DEL LISTADO DE USUARIOS
@@ -17,8 +17,8 @@ let indexUserLogin = parseInt(localStorage.getItem("userID"));
 let usuarioLogeado = usuarios[indexUserLogin]; // TENGO QUE VER LA FORMA DE OBTENERLO DEL LOGIN con el localStorage
 
 // FORMATEAR FORMULARIO CON FECHA ACTUAL
-let fechaHoy=new Date();
-$("#dia").val(formatearFecha(fechaHoy,0,`-`));
+let fechaHoy = new Date();
+$("#dia").val(formatearFecha(fechaHoy, 0, `-`));
 
 //SALUDO DE BIENVENIDA
 if (usuarioLogeado.sexo === `M`) {
@@ -33,31 +33,27 @@ usuarioLogeado.mostrarMovimientos();
 
 $("#formProcesamiento").submit(function (e) {
     e.preventDefault();
-    let fecha = convertirFecha($("#dia").val());
-    let env1 = $("#envoltorio1").val();
-    let env2 = $("#envoltorio2").val();
-    let emb = $("#embalaje").val();
-    let mAlm = $("#mAlmacenamiento").val();
-    let lAlm = $("#lAlmacenamiento").val();
-    
-    //console.log(fecha,env1, env2, emb, mAlm, lAlm);
-    location.href = "#puntaje";
-    
-    let resultado = calcularPuntajeProceso(env1, env2, emb, mAlm, lAlm);
-    let diasEsteriles = calcularDiasEsterilidad(resultado[0]);
-    
-    usuarioLogeado.registrarMovimiento(fecha,resultado[0], resultado[1], diasEsteriles);
-    usuarioLogeado.mostrarResultado();
-    usuarioLogeado.mostrarMovimientos();     
+    let datosForm = document.querySelectorAll(".form-select")
+    let fecha = convertirFecha(datosForm[5].value);
 
-    usuarios[indexUserLogin]=usuarioLogeado; //guardo cambios del usuario en listado de usuarios en memoria
-    
-        
+    location.href = "#puntaje";
+
+    let resultado = calcularPuntajeProceso(datosForm[0].value, datosForm[1].value, datosForm[2].value, datosForm[3].value, datosForm[4].value);
+    let diasEsteriles = calcularDiasEsterilidad(resultado[0]);
+
+    usuarioLogeado.registrarMovimiento(fecha, resultado[0], resultado[1], diasEsteriles);
+    usuarioLogeado.mostrarResultado();
+    usuarioLogeado.mostrarMovimientos();
+
+    usuarios[indexUserLogin] = usuarioLogeado; //guardo cambios del usuario en listado de usuarios en memoria
+
     localStorage.setItem(`listaUsuarios`, JSON.stringify(usuarios))   // guardo cambios en el local Store
-    
+
     $("#formProcesamiento")[0].reset();   //reseteo formulario
-    $("#dia").val(formatearFecha(fechaHoy,0,`-`)); // vuelvo a inicializar el campo de la fecha al dia de hoy
+    $("#dia").val(formatearFecha(fechaHoy, 0, `-`)); // vuelvo a inicializar el campo de la fecha al dia de hoy
 });
+
+//------------------------------------------------------------------------------------------------------------------------------
 
 /**
  * Funcion que me calcula el puntaje del procesamiento escogido en el formulario
@@ -142,7 +138,7 @@ function calcularPuntajeProceso(envoltorio1, envoltorio2, embalaje, medioAlm, lu
             break;
 
         case "Contenedor":
-            puntaje += 90
+            puntaje += 60
             proceso += "Cont-"
             break;
 
@@ -168,28 +164,28 @@ function calcularPuntajeProceso(envoltorio1, envoltorio2, embalaje, medioAlm, lu
     }
 
     //PUNTAJE LUGAR ALMACENAMIENTO
-
     switch (lugarAlm) {
-        case "Habitacion del Paciente":
+        case "Deposito en Quirófano o Esterilización":
             puntaje += 300
+            proceso += "DQoE"
+            break;
+        case "Deposito Material":
+            puntaje += 75
+            proceso += "DM"
+                break;
+        case "Deposito Material Estéril":
+            puntaje += 250
+            proceso += "DME"
+            break;
+        case "Habitacion del Paciente":
+            puntaje += 0
             proceso += "HP"
             break;
         case "Office de Enfermería":
-            puntaje += 75
+            puntaje += 50
             proceso += "O.Ef"
             break;
-        case "Deposito Material":
-            puntaje += 250
-            proceso += "DM"
-            break;
-        case "Deposito Material Estéril":
-            puntaje += 0
-            proceso += "DME"
-            break;
-        case "Deposito en Quirófano o Esterilización":
-            puntaje += 50
-            proceso += "DQoE"
-            break;
+       
     }
     resultados[0] = puntaje;
     resultados[1] = proceso;
@@ -204,51 +200,72 @@ function calcularPuntajeProceso(envoltorio1, envoltorio2, embalaje, medioAlm, lu
  */
 
 function calcularDiasEsterilidad(puntaje) {
+    const listapunjates = [
+
+        {
+            puntaje: 50,
+            vencimiento: 7
+        },
+
+        {
+            puntaje: 100,
+            vencimiento: 30
+        },
+
+        {
+            puntaje: 200,
+            vencimiento: 60
+        },
+
+        {
+            puntaje: 300,
+            vencimiento: 90
+        },
+
+        {
+            puntaje: 400,
+            vencimiento: 180
+        },
+
+        {
+            puntaje: 600,
+            vencimiento: 365
+        },
+
+        {
+            puntaje: 750,
+            vencimiento: 730
+        },
+    ]   
 
     let diasVenc = 0
 
-    if (puntaje < 50) {
-        diasVenc = 7;
-    } else {
-        if (puntaje < 100) {
-            diasVenc = 30;
-        } else {
-            if (puntaje < 200) {
-                diasVenc = 60;
-            } else {
-                if (puntaje < 300) {
-                    diasVenc = 90;
-                } else {
-                    if (puntaje < 400) {
-                        diasVenc = 180;
-                    } else {
-                        if (puntaje < 600) {
-                            diasVenc = 365;
-                        } else {
-                            if (puntaje < 750) {
-                                diasVenc = 730;
-                            } else {
-                                diasVenc = 1826;
-                            }
-                        }
-                    }
-                }
+        for (let i=0;i<listapunjates.length;i++){
+            const puntajeDato = listapunjates[i]
+
+            if (puntaje < puntajeDato.puntaje){
+                diasVenc = puntajeDato.vencimiento;
+                break;
+            }else{
+                diasVenc = 1826;
             }
         }
-    }
-
 
     return diasVenc;
 }
-                              
-function convertirFecha (dateString){    
-    
-    let dia = parseInt(dateString.substring(8,10));
-    let mes = parseInt(dateString.substring(5,7));
-    let año = parseInt(dateString.substring(0,4));
+/**
+ * Tomar como paramarto una fecha en formato String y devuelve la fecha en instacianda como un objeto Date 
+ * @param {*} dateString  fecha en formato String
+ * @returns fecha en objeto Date
+ */
+function convertirFecha(dateString) {
 
-    let date = new Date (año,mes-1,dia)
-    
+    let dia = parseInt(dateString.substring(8, 10));
+    let mes = parseInt(dateString.substring(5, 7));
+    let año = parseInt(dateString.substring(0, 4));
+
+    let date = new Date(año, mes - 1, dia)
+
     return date
 }
 
@@ -259,7 +276,7 @@ function convertirFecha (dateString){
  * @param {*} tipo  seleccionar distinto tipo de formatos : separador / (mm/dd/yyy)  separador - (yyyy-mm-dd)
  * @returns 
  */
- function formatearFecha(fecha, cantDias, tipo) {
+function formatearFecha(fecha, cantDias, tipo) {
 
     let dia = ""
     let mes = ""
