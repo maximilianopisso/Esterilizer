@@ -189,7 +189,7 @@ function calcularPuntajeProceso(envoltorio1, envoltorio2, embalaje, medioAlm, lu
     }
     resultados[0] = puntaje;
     resultados[1] = proceso;
-    // console.log(resultados[0], resultados[1])
+  
     return resultados;
 }
 

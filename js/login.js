@@ -55,7 +55,7 @@ function validarUsuario(email, password) {
     let indice_error =""
 
     for (let i = 0; i < usuarios.length; i++) {
-        // console.log(email + password + usuarios[i].email + usuarios[i].password +usuarios.length);
+      
         //LLama a la funcion de validacion del propio usuario para chequaer su usuario y contraseña con el enviados a traves del metodo.
 
         respuesta = usuarios[i].validarLogin(email, password)
