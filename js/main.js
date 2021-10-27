@@ -138,7 +138,7 @@ function calcularPuntajeProceso(envoltorio1, envoltorio2, embalaje, medioAlm, lu
             break;
 
         case "Contenedor":
-            puntaje += 90
+            puntaje += 60
             proceso += "Cont-"
             break;
 
@@ -165,26 +165,27 @@ function calcularPuntajeProceso(envoltorio1, envoltorio2, embalaje, medioAlm, lu
 
     //PUNTAJE LUGAR ALMACENAMIENTO
     switch (lugarAlm) {
-        case "Habitacion del Paciente":
+        case "Deposito en Quirófano o Esterilización":
             puntaje += 300
+            proceso += "DQoE"
+            break;
+        case "Deposito Material":
+            puntaje += 75
+            proceso += "DM"
+                break;
+        case "Deposito Material Estéril":
+            puntaje += 250
+            proceso += "DME"
+            break;
+        case "Habitacion del Paciente":
+            puntaje += 0
             proceso += "HP"
             break;
         case "Office de Enfermería":
-            puntaje += 75
+            puntaje += 50
             proceso += "O.Ef"
             break;
-        case "Deposito Material":
-            puntaje += 250
-            proceso += "DM"
-            break;
-        case "Deposito Material Estéril":
-            puntaje += 0
-            proceso += "DME"
-            break;
-        case "Deposito en Quirófano o Esterilización":
-            puntaje += 50
-            proceso += "DQoE"
-            break;
+       
     }
     resultados[0] = puntaje;
     resultados[1] = proceso;
@@ -199,39 +200,56 @@ function calcularPuntajeProceso(envoltorio1, envoltorio2, embalaje, medioAlm, lu
  */
 
 function calcularDiasEsterilidad(puntaje) {
+    const listapunjates = [
+
+        {
+            puntaje: 50,
+            vencimiento: 7
+        },
+
+        {
+            puntaje: 100,
+            vencimiento: 30
+        },
+
+        {
+            puntaje: 200,
+            vencimiento: 60
+        },
+
+        {
+            puntaje: 300,
+            vencimiento: 90
+        },
+
+        {
+            puntaje: 400,
+            vencimiento: 180
+        },
+
+        {
+            puntaje: 600,
+            vencimiento: 365
+        },
+
+        {
+            puntaje: 750,
+            vencimiento: 730
+        },
+    ]   
 
     let diasVenc = 0
 
-    if (puntaje < 50) {
-        diasVenc = 7;
-    } else {
-        if (puntaje < 100) {
-            diasVenc = 30;
-        } else {
-            if (puntaje < 200) {
-                diasVenc = 60;
-            } else {
-                if (puntaje < 300) {
-                    diasVenc = 90;
-                } else {
-                    if (puntaje < 400) {
-                        diasVenc = 180;
-                    } else {
-                        if (puntaje < 600) {
-                            diasVenc = 365;
-                        } else {
-                            if (puntaje < 750) {
-                                diasVenc = 730;
-                            } else {
-                                diasVenc = 1826;
-                            }
-                        }
-                    }
-                }
+        for (let i=0;i<listapunjates.length;i++){
+            const puntajeDato = listapunjates[i]
+
+            if (puntaje < puntajeDato.puntaje){
+                diasVenc = puntajeDato.vencimiento;
+                break;
+            }else{
+                diasVenc = 1826;
             }
         }
-    }
-
 
     return diasVenc;
 }
