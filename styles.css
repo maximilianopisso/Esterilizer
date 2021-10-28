@@ -1,13 +1,13 @@
 /* CSS General */
 *{
     margin: 0px;
-  padding: 0px;
+    padding: 0px;
 }
+
 #login{
 
     background-image: linear-gradient(180deg,#fff 20%, #33ce7942 100%);
 }
-
 
 
 h1{  
@@ -23,7 +23,7 @@ h2{
 }
 
 #inicio{
-    margin: 120px auto;
+    margin: 15vh auto;
 }
 
 /* CSS Header */
@@ -71,7 +71,7 @@ h2{
     font-size: 30px;
     font-weight: 500;
     background-color: #2a8d56 ;
-    margin-top: 15px;
+    margin-top: 5vh;
 }
 
 #formularioLogin input{
@@ -91,7 +91,6 @@ h2{
 
 /* CSS Principal */
 
-/* CSS Login */
 
 #formProcesamiento{
     display: flex;
