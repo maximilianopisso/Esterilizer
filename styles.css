@@ -11,13 +11,13 @@
 
 
 h1{  
-    font-size: 40px;
+    font-size: 30px;
     color: #2a6143;
     font-weight: bold ;
 }
 
 h2{  
-    font-size: 35px;
+    font-size: 20px;
     color: #2a6143;
     font-weight: bold ;
 }
@@ -28,7 +28,7 @@ h2{
 
 /* CSS Header */
 .icono-login{
-    width: 20%;
+    max-width:15%;
     
 }
 .logo{
@@ -68,21 +68,21 @@ h2{
 }
 
 #formularioLogin #boton{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 500;
     background-color: #2a8d56 ;
     margin-top: 5vh;
 }
 
 #formularioLogin input{
-    font-size: 20px;
+    font-size: 15px;
     background-color: white;
     font-weight: 500;
     color:rgb(48, 47, 47);
 }
 
 #formularioLogin label{
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     color:rgb(48, 47, 47);
 }
