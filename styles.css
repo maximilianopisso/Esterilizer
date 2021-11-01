@@ -5,6 +5,7 @@
 }
 #bodyLogin{
     background-image: linear-gradient(180deg,#fff 20%, #33ce7942 100%);
+    background-repeat:no-repeat; 
 }
 
 /*Separaciones de secciones */
@@ -14,6 +15,7 @@
 
 #inicio h1{
     color: #215237;
+    font-size: 1.9rem;
 }
 
 /* CSS Header */
@@ -91,15 +93,31 @@
 }
 
 
+/* CSS SIMULADOR */
 
-
-
-
-
-/* CSS Esterilizer */
 
 #esterilizer{
-    margin: 7vh auto;
+    margin: 2vh auto;
+}
+
+#esterilizer h1{
+    color: #215237;
+    font-size: 2rem;
+    margin: 4vh 0vw;
+}
+
+#esterilizer h2{
+    color:rgb(48, 47, 47);
+    font-size: 1.4rem;
+    margin: 5vh 0vw 3vh 0vw;
+}
+
+#esterilizer h3{
+    background-color: #2a8d56 ;
+    color:white;
+    font-size: 1.5rem;
+    padding: 1vh 1vw;
+    margin: 2vh 0vw;
 }
 
 #formProcesamiento{
@@ -108,7 +126,7 @@
 }
 
 #formProcesamiento #calcular{
-    font-size: 30px;
+    font-size: 18px;
     font-weight: 500;
     background-color: #2a8d56 ;
 }
@@ -121,7 +139,8 @@
 }
 
 #formProcesamiento label{
-    font-size: 22px;
+    margin: 2vh 0vw 1vh 0vw;
+    font-size: 18px;
     font-weight: 700;
     color:rgb(48, 47, 47);
 }
